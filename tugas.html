@@ -26,8 +26,8 @@
                 <li class="nav-item"><a href="/index.html" class="nav-link" aria-current="page">Beranda</a></li>
                 <li class="nav-item"><a href="/tentang.html" class="nav-link ">Tentang</a></li>
                 <li class="nav-item"><a href="/kisahku.html" class="nav-link ">Kisahku</a></li>
-                <li class="nav-item"><a href="/pendidikan.html" class="nav-link active">Pendidikan</a></li>
-                <li class="nav-item"><a href="/tugas.html" class="nav-link">Tugas</a></li>
+                <li class="nav-item"><a href="/pendidikan.html" class="nav-link ">Pendidikan</a></li>
+                <li class="nav-item"><a href="/tugas.html" class="nav-link" active>Tugas</a></li>
             </ul>
         </header>
     </div>
@@ -41,24 +41,23 @@
                     <div class="row g-3" id="containers">
                         <div class="col-lg-6">
                             <label for="firstName" class="form-label">Nama Depan</label>
-                            <input type="text" class="form-control" id="firstName" value="Mark" required>
+                            <input type="text" class="form-control" id="firstName" required>
                             <div class="invalid-feedback">
                                 masukan nama depan
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <label for="secondName" class="form-label">Nama Belakang</label>
-                            <input type="text" class="form-control" id="secondName" value="Otto" required>
+                            <input type="text" class="form-control" id="secondName" required>
                             <div class="invalid-feedback">
                                 masukan nama belakang
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="validationCustomUsername" class="form-label">Email</label>
+                            <label for="emails" class="form-label">Email</label>
                             <div class="input-group has-validation">
-                                <span class="input-group-text" id="emails">@</span>
-                                <input type="email" class="form-control" id="validationCustomUsername"
-                                    aria-describedby="emails" required value="aa@gmail.com">
+                                <span class="input-group-text" id="emailsSpan">@</span>
+                                <input type="email" class="form-control" id="emails" aria-describedby="emails" required>
                                 <div class="invalid-feedback">
                                     masukan email yang valid
                                 </div>
@@ -66,7 +65,7 @@
                         </div>
                         <div class="col-lg-6">
                             <label for="pilihan" class="form-label">Pilihan</label>
-                            <input type="number" class="form-control" id="pilihan" required min="0" value="2">
+                            <input type="number" class="form-control" id="pilihan" required min="0">
                             <div class="invalid-feedback">
                                 masukan inputan pilihan berupa angka
                             </div>
@@ -76,14 +75,39 @@
                         </div>
                     </div>
                 </form>
+
+
             </div>
         </div>
     </div>
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             'use strict'
+            let namaDepan;
+            let namaBelakang;
+            let emails;
+            let jumlahPilihan;
+            let pilihanValue = [];
             const forms = document.querySelectorAll('.needs-validation')
             Array.from(forms).forEach(form => {
                 form.addEventListener('submit', event => {
@@ -100,38 +124,54 @@
             })
 
             const masukanPilihan = () => {
-                const container = document.getElementById('containers')
-                const pilihan = document.getElementById('pilihan').value
+                const container = document.getElementById('containers');
+                const pilihan = document.getElementById('pilihan').value;
+                console.log("🚀 ~ masukanPilihan ~ pilihan:", pilihan)
+                const firstName = document.getElementById('firstName').value;
+                const secondName = document.getElementById('secondName').value;
+                const email = document.getElementById('emails').value;
+                jumlahPilihan = pilihan;
+                console.log("🚀 ~ masukanPilihan ~ jumlahPilihan:", jumlahPilihan);
+                namaDepan = firstName;
+                console.log("🚀 ~ masukanPilihan ~ namaDepan:", namaDepan)
+                namaBelakang = secondName;
+                console.log("🚀 ~ masukanPilihan ~ namaBelakang:", namaBelakang)
+                emails = email;
+                console.log("🚀 ~ masukanPilihan ~ emails:", emails);
+
                 const sumbitBtn = document.createElement('button');
                 sumbitBtn.classList.add('btn', 'btn-primary');
                 sumbitBtn.innerHTML = 'Submit';
-                sumbitBtn.type = 'button';
+                sumbitBtn.type = 'submit';
 
-                container.innerHTML = ''
-                console.log("🚀 ~ masukanPilihan ~ pilihan:", pilihan)
+                container.innerHTML = '';
+                console.log("🚀 ~ masukanPilihan ~ pilihan:", pilihan);
                 for (let i = 1; i <= pilihan; i++) {
                     const inpPilihan = document.createElement('div');
                     inpPilihan.classList.add('col-lg-6');
                     inpPilihan.style.width = '18rem';
                     inpPilihan.innerHTML = `
-                        <div class="w-100">
-                            <label for="pilihanInp" class="form-label">Pilihan ${i}</label>
-                            <input type="text" class="form-control" id="pilihanInp${i}" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                    `;
+                <div class="w-100">
+                    <label for="pilihanInp" class="form-label">Pilihan ${i}</label>
+                    <input type="text" class="form-control" id="pilihanInp${i}" name="pilihanInput" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+            `;
                     container.appendChild(inpPilihan);
                 }
+                const inpPilihanValue = document.querySelectorAll('[name="pilihanInput"]');
+                console.log("🚀 ~ masukanPilihan ~ inpPilihanValue:", inpPilihanValue)
                 sumbitBtn.addEventListener('click', () => {
-                    validatePilihanForms();
-                })
+                    validatePilihanForms(inpPilihanValue);
+                });
                 container.appendChild(sumbitBtn);
-            }
+            };
 
-            const validatePilihanForms = () => {
+            const validatePilihanForms = (inpPilihanValue) => {
                 const forms = document.querySelectorAll('.needs-validation')
+                console.log("PAKER")
                 Array.from(forms).forEach(form => {
                     form.addEventListener('submit', event => {
                         if (!form.checkValidity()) {
@@ -140,44 +180,90 @@
                         } else {
                             event.preventDefault()
                             event.stopPropagation()
-                            masukanPilihan()
+                            showCheckForms(inpPilihanValue)
                         }
                         form.classList.add('was-validated')
                     }, false)
                 })
             }
 
-            const showCheckForms = () => {
+            const showCheckForms = (inpPilihanValue) => {
+                console.log("MASOK")
+                console.log("🚀 ~ showCheckForms ~ inpPilihanValue:", inpPilihanValue)
                 const container = document.getElementById('containers')
-                const pilihan = document.getElementById('pilihan').value
                 const sumbitBtn = document.createElement('button');
                 sumbitBtn.classList.add('btn', 'btn-primary');
                 sumbitBtn.innerHTML = 'Submit';
                 sumbitBtn.type = 'button';
 
                 container.innerHTML = ''
-                console.log("🚀 ~ masukanPilihan ~ pilihan:", pilihan)
-                for (let i = 1; i <= pilihan; i++) {
-                    const inpPilihan = document.createElement('div');
-                    inpPilihan.classList.add('col-lg-6');
-                    inpPilihan.style.width = '18rem';
-                    inpPilihan.innerHTML = `
-                        <div class="w-100">
-                            <label for="pilihanInp" class="form-label">Pilihan ${i}</label>
-                            <input type="text" class="form-control" id="pilihanInp${i}" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-                    `;
-                    container.appendChild(inpPilihan);
-                }
-                sumbitBtn.addEventListener('click', () => {
-                    validatePilihanForms();
-                })
-                container.appendChild(sumbitBtn);
-            }
+                const checkWrapper = document.createElement('div');
 
+                const checkedValues = []; // Array untuk menyimpan nilai yang dicentang
+
+                inpPilihanValue.forEach((inpPilihan) => {
+                    console.log('inpPilihanValue', inpPilihan.value);
+                    const pilihanValue = inpPilihan.value;
+                    const check = document.createElement('div');
+                    check.classList.add('form-check');
+                    check.innerHTML = `
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="${pilihanValue}" id="flexCheckChecked">
+                        <label class="form-check-label" for="flexCheckChecked">
+                            ${pilihanValue}
+                        </label>
+                    </div>`;
+                    check.querySelector('.form-check-input').addEventListener('change', (event) => {
+                        // Ketika kotak centang berubah, perbarui nilai yang dicentang
+                        if (event.target.checked) {
+                            checkedValues.push(event.target.value);
+                        } else {
+                            const index = checkedValues.indexOf(event.target.value);
+                            if (index !== -1) {
+                                checkedValues.splice(index, 1);
+                            }
+                        }
+                    });
+                    checkWrapper.appendChild(check);
+                });
+                container.appendChild(checkWrapper);
+                container.appendChild(sumbitBtn);
+
+                sumbitBtn.addEventListener('click', () => {
+                    showResult(checkedValues);
+                });
+
+                const modalBody = document.getElementById('modalBody');
+                modalBody.innerHTML = `
+                    Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}. Saya mempunyai pilihan sejumlah ${jumlahPilihan}, dan saya memilih ${checkedValues.join(', ')}.
+                    `;
+            };
+
+            const showResult = (checkedValues) => {
+                const modalBody = document.getElementById('modalBody');
+                const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+                console.log("🚀 ~ showResult ~ modal:", modal)
+
+                modalBody.innerHTML = `
+                    <p>Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}.</p>
+                    <p>Saya mempunyai pilihan sejumlah ${jumlahPilihan}, dan saya memilih:</p>
+                    <ul>
+                        ${checkedValues.map(value => `<li>${value}</li>`).join('')}
+                    </ul>
+                    `
+                modal.show();
+            }
+            // const showResult = () => {
+            //     const modalBody = document.getElementById('modalBody');
+            //     const modal = getElementById('exampleModal')
+
+
+
+            //     modal.addEventListener('show.bs.modal', () => {
+            //         console.log('modal shown')
+            //     })
+
+            // }
 
         })
     </script>
