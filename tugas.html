@@ -23,11 +23,11 @@
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="/index.html" class="nav-link" aria-current="page">Beranda</a></li>
-                <li class="nav-item"><a href="/tentang.html" class="nav-link ">Tentang</a></li>
-                <li class="nav-item"><a href="/kisahku.html" class="nav-link ">Kisahku</a></li>
-                <li class="nav-item"><a href="/pendidikan.html" class="nav-link ">Pendidikan</a></li>
-                <li class="nav-item"><a href="/tugas.html" class="nav-link" active>Tugas</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link" aria-current="page">Beranda</a></li>
+                <li class="nav-item"><a href="tentang.html" class="nav-link ">Tentang</a></li>
+                <li class="nav-item"><a href="kisahku.html" class="nav-link ">Kisahku</a></li>
+                <li class="nav-item"><a href="pendidikan.html" class="nav-link ">Pendidikan</a></li>
+                <li class="nav-item"><a href="tugas.html" class="nav-link" active>Tugas</a></li>
             </ul>
         </header>
     </div>
@@ -64,10 +64,10 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="pilihan" class="form-label">Pilihan</label>
+                            <label for="pilihan" class="form-label">Banyak Pilihan Hoby</label>
                             <input type="number" class="form-control" id="pilihan" required min="0">
                             <div class="invalid-feedback">
-                                masukan inputan pilihan berupa angka
+                                masukan inputan pilihan hoby berupa angka
                             </div>
                         </div>
                         <div class="container w-100 p-3 mx-auto text-center">
@@ -108,6 +108,7 @@
             let emails;
             let jumlahPilihan;
             let pilihanValue = [];
+            let hobyValue = []
             const forms = document.querySelectorAll('.needs-validation')
             Array.from(forms).forEach(form => {
                 form.addEventListener('submit', event => {
@@ -203,6 +204,7 @@
 
                 inpPilihanValue.forEach((inpPilihan) => {
                     console.log('inpPilihanValue', inpPilihan.value);
+                    hobyValue.push(inpPilihan.value);
                     const pilihanValue = inpPilihan.value;
                     const check = document.createElement('div');
                     check.classList.add('form-check');
@@ -235,7 +237,7 @@
 
                 const modalBody = document.getElementById('modalBody');
                 modalBody.innerHTML = `
-                    Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}. Saya mempunyai pilihan sejumlah ${jumlahPilihan}, dan saya memilih ${checkedValues.join(', ')}.
+                    Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}. Saya mempunyai sejumlah ${jumlahPilihan} pilihan hoby yaitu ${hobyValue.join(', ')} , dan saya memilih ${checkedValues.join(', ')}.
                     `;
             };
 
@@ -246,7 +248,7 @@
 
                 modalBody.innerHTML = `
                     <p>Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}.</p>
-                    <p>Saya mempunyai pilihan sejumlah ${jumlahPilihan}, dan saya memilih:</p>
+                    <p>Saya mempunyai sejumlah ${jumlahPilihan} pilihan hoby yaitu ${hobyValue.join(', ')} , dan saya memilih:</p>
                     <ul>
                         ${checkedValues.map(value => `<li>${value}</li>`).join('')}
                     </ul>
