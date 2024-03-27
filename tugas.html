@@ -19,7 +19,7 @@
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" />
                 </svg>
-                <span class="fs-4 text-white">Gabriel</span>
+                <span class="fs-4 text-white">Gabrielxhegell_</span>
             </a>
 
             <ul class="nav nav-pills">
@@ -27,7 +27,7 @@
                 <li class="nav-item"><a href="tentang.html" class="nav-link ">Tentang</a></li>
                 <li class="nav-item"><a href="kisahku.html" class="nav-link ">Kisahku</a></li>
                 <li class="nav-item"><a href="pendidikan.html" class="nav-link ">Pendidikan</a></li>
-                <li class="nav-item"><a href="tugas.html" class="nav-link" active>Tugas</a></li>
+                <li class="nav-item"><a href="tugas.html" class="nav-link active">Tugas</a></li>
             </ul>
         </header>
     </div>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="pilihan" class="form-label">Banyak Pilihan Hoby</label>
+                            <label for="pilihan" class="form-label">Banyak Pilihan Hobi </label>
                             <input type="number" class="form-control" id="pilihan" required min="0">
                             <div class="invalid-feedback">
                                 masukan inputan pilihan hoby berupa angka
@@ -86,7 +86,7 @@
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content bg-dark">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Hasil</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modalBody">
@@ -153,7 +153,7 @@
                     inpPilihan.style.width = '18rem';
                     inpPilihan.innerHTML = `
                 <div class="w-100">
-                    <label for="pilihanInp" class="form-label">Pilihan ${i}</label>
+                    <label for="pilihanInp" class="form-label">Hobi ${i}</label>
                     <input type="text" class="form-control" id="pilihanInp${i}" name="pilihanInput" required>
                     <div class="valid-feedback">
                         Looks good!
@@ -196,8 +196,10 @@
                 sumbitBtn.classList.add('btn', 'btn-primary');
                 sumbitBtn.innerHTML = 'Submit';
                 sumbitBtn.type = 'button';
-
+                const title = document.createElement('div');
+                title.innerHTML = `<h1 class="container fw-bold text-center mb-3">Pilih Hobi</h1>`;
                 container.innerHTML = ''
+                container.appendChild(title);
                 const checkWrapper = document.createElement('div');
 
                 const checkedValues = []; // Array untuk menyimpan nilai yang dicentang
@@ -237,7 +239,7 @@
 
                 const modalBody = document.getElementById('modalBody');
                 modalBody.innerHTML = `
-                    Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}. Saya mempunyai sejumlah ${jumlahPilihan} pilihan hoby yaitu ${hobyValue.join(', ')} , dan saya memilih ${checkedValues.join(', ')}.
+                    Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}. Saya mempunyai sejumlah ${jumlahPilihan} pilihan hobi yaitu ${hobyValue.join(', ')} , dan saya memilih ${checkedValues.join(', ')}.
                     `;
             };
 
@@ -248,7 +250,7 @@
 
                 modalBody.innerHTML = `
                     <p>Hallo, Nama saya ${namaDepan} ${namaBelakang}, dengan Email ${emails}.</p>
-                    <p>Saya mempunyai sejumlah ${jumlahPilihan} pilihan hoby yaitu ${hobyValue.join(', ')} , dan saya memilih:</p>
+                    <p>Saya mempunyai sejumlah ${jumlahPilihan} pilihan hobi yaitu ${hobyValue.join(', ')} , dan saya memilih:</p>
                     <ul>
                         ${checkedValues.map(value => `<li>${value}</li>`).join('')}
                     </ul>
